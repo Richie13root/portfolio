@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PRINCE RICHART | Cybersecurity Engineer</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        cyber: {
+                            black: '#050505',
+                            dark: '#0a0a0c',
+                            gray: '#1f2937',
+                            accent: '#bc13fe',
+                            secondary: '#00f0ff',
+                            accentDim: 'rgba(188, 19, 254, 0.1)',
+                            red: '#ff0055'
+                        }
+                    },
+                    fontFamily: {
+                        mono: ['"JetBrains Mono"', 'monospace'],
+                        sans: ['"Inter"', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body { background-color: #050505; color: #e5e7eb; margin: 0; padding: 0; min-height: 100vh; }
+        #bg-canvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none; background: radial-gradient(circle at center, rgba(10, 10, 15, 0) 0%, rgba(0, 0, 0, 0.8) 100%); }
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #050505; }
+        ::-webkit-scrollbar-thumb { background: #1a1a1a; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #bc13fe; }
+        .glitch-text:hover { text-shadow: 2px 0 #bc13fe, -2px 0 #00f0ff; }
+        .profile-container { position: relative; width: 180px; height: 180px; display: flex; align-items: center; justify-content: center; }
+       <!-- .profile-circle { width: 160px; height: 160px; border-radius: 50%; overflow: hidden; border: 2px solid #bc13fe; position: relative; z-index: 10; background: #0a0a0a; box-shadow: 0 0 30px rgba(188, 19, 254, 0.3); }
+        .profile-img { width: 100%; height: 120%; scale-down: cover; }
+        .radar-ring { position: absolute; width: 180px; height: 180px; border-radius: 50%; border: 1px solid rgba(0, 240, 255, 0.2); border-top: 3px solid #00f0ff; animation: radar-rotate 4s linear infinite; }
+        @keyframes radar-rotate { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+        .crt::before { content: " "; display: block; position: absolute; top: 0; left: 0; bottom: 0; right: 0; background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.1) 50%), linear-gradient(90deg, rgba(188, 19, 254, 0.02), rgba(0, 240, 255, 0.02), rgba(255, 255, 255, 0.02)); z-index: 2; background-size: 100% 2px, 3px 100%; pointer-events: none; }
+        section { position: relative; z-index: 10; }
+        .text-glow { text-shadow: 0 0 15px rgba(188, 19, 254, 0.6); }
+        .btn-gradient { background: linear-gradient(45deg, #bc13fe, #00f0ff); color: white; transition: all 0.3s ease; }
+        .btn-gradient:hover { box-shadow: 0 0 25px rgba(188, 19, 254, 0.6); transform: translateY(-2px); } -->
+    </style>
+</head>
+<body class="font-sans antialiased overflow-x-hidden relative">
+
+    <canvas id="bg-canvas"></canvas>
+
+    <nav class="fixed w-full z-50 bg-cyber-dark/80 backdrop-blur-lg border-b border-white/5">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex-shrink-0">
+                    <span class="font-mono text-xl font-bold text-cyber-secondary tracking-tighter uppercase">Building Resilient Cyber Defence</span>
+                </div>
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-8">
+                        <a href="#home" class="text-gray-400 hover:text-cyber-accent px-3 py-2 text-sm font-medium transition-colors">Home</a>
+                        <a href="#skills" class="text-gray-400 hover:text-cyber-accent px-3 py-2 text-sm font-medium transition-colors">Core</a>
+                        <a href="#projects" class="text-gray-400 hover:text-cyber-accent px-3 py-2 text-sm font-medium transition-colors">Projects</a>
+                        <a href="#experience" class="text-gray-400 hover:text-cyber-accent px-3 py-2 text-sm font-medium transition-colors">History</a>
+                        <a href="#certs" class="text-gray-400 hover:text-cyber-accent px-3 py-2 text-sm font-medium transition-colors">Certs</a>
+                        <a href="mailto:princerichart46@gmail.com" class="border border-cyber-accent/30 text-cyber-accent hover:bg-cyber-accent hover:text-white px-4 py-2 rounded-md text-sm font-bold transition-all duration-300">Ping Me</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="min-h-screen flex items-center justify-center pt-16 relative overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full grid grid-cols-1 lg:grid-cols-2 gap-12 items-center relative z-10">
+            <div class="order-2 lg:order-1">
+                <div class="inline-flex items-center px-3 py-1 rounded-full border border-cyber-accent/40 bg-cyber-accent/10 text-cyber-accent text-xs font-mono mb-6 backdrop-blur-sm">
+                    <span class="w-2 h-2 rounded-full bg-cyber-accent animate-pulse mr-2"></span>
+                    Active @ Quadrasystems.net
+                </div>
+                
+                <div class="flex flex-col md:flex-row items-center gap-3 mb-10">
+                    <div class="profile-container">
+                        <div class="radar-ring"></div>
+                        <div class="profile-circle">
+                            <img src="C:\Users\GopinathM\Downloads\prince image.png" class="profile-img">
+                        </div>
+                    </div>
+                    <div class="text-center md:text-left">
+                        <h1 class="text-5xl md:text-7xl font-black tracking-tighter leading-none text-glow">
+                            PRINCE<br>
+                            <span class="text-transparent bg-clip-text bg-gradient-to-r from-cyber-accent to-cyber-secondary glitch-text uppercase">RICHART</span>
+                        </h1>
+                        <p class="font-mono text-cyber-secondary/80 text-xs mt-4 tracking-[0.2em] uppercase font-bold">Cybersecurity Engineer</p>
+                    </div>
+                </div>
+                <p class="text-gray-400 text-lg mb-8 max-w-lg leading-relaxed font-mono bg-black/40 p-4 rounded-lg backdrop-blur-md border border-white/5">
+                    Cybersecurity Engineer and Ethical Hacker dedicated to proactive breach prevention. Specializing in Endpoint Security, Zero Trust architecture, Vulnerability and critical Email Security hardening to minimize enterprise risk.
+                </p>
+                <div class="flex flex-wrap gap-4">
+                   <!-- <a href="#projects" class="btn-gradient font-bold py-3 px-8 rounded shadow-xl">Analyze_Projects</a>  -->
+                    <a href="https://https://github.com/Richie13root" target="_blank" class="bg-white/5 border border-gray-700 backdrop-blur-md hover:border-cyber-secondary text-gray-300 hover:text-white py-3 px-8 rounded transition-all flex items-center gap-2">
+                        <i class="fab fa-github"></i> Github
+                    </a>
+                    <a href="https://linkedin.com/in/princerichart" target="_blank" class="bg-white/5 border border-gray-700 backdrop-blur-md hover:border-cyber-secondary text-gray-300 hover:text-white py-3 px-8 rounded transition-all flex items-center gap-2">
+                        <i class="fab fa-linkedin"></i> LinkedIn
+                    </a>
+                </div>
+            </div>
+
+            <div class="order-1 lg:order-2">
+                <div class="w-full max-w-lg mx-auto bg-cyber-dark/90 backdrop-blur-md rounded-lg border border-white/10 shadow-2xl overflow-hidden crt relative">
+                    <div class="bg-gray-900/80 px-4 py-2 flex items-center justify-between border-b border-white/5">
+                        <div class="flex space-x-2"><div class="w-3 h-3 rounded-full bg-red-500"></div><div class="w-3 h-3 rounded-full bg-gray-700"></div><div class="w-3 h-3 rounded-full bg-gray-700"></div></div>
+                        <div class="text-xs text-gray-500 font-mono italic">visitor@prince-r:~$</div>
+                    </div>
+                    <div class="p-6 font-mono text-sm h-80 overflow-y-auto" id="terminal-body">
+                        <div id="terminal-content"></div>
+                        <div class="flex items-center mt-2">
+                            <span class="text-cyber-accent mr-2">➜</span>
+                            <span class="animate-blink bg-cyber-accent w-2 h-5 inline-block align-middle"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- History Section -->
+    <section id="experience" class="py-32 scroll-mt-24">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center gap-6 mb-16">
+                <div class="p-2 bg-cyber-accentDim rounded-lg border border-cyber-accent/20">
+                    <i data-lucide="globe" class="w-6 h-6 text-cyber-accent"></i>
+                </div>
+                <h2 class="text-2xl md:text-3xl font-bold text-gray-100 font-mono">
+                    <span class="text-cyber-accent mr-2"></span>Professional Experience
+                </h2>
+            </div>
+
+            <div class="space-y-12 relative before:absolute before:left-0 before:top-2 before:bottom-0 before:w-px before:bg-gradient-to-b before:from-cyber-accent before:to-transparent">
+                <!-- Experience 1 -->
+                <div class="relative pl-10 group">
+                    <div class="absolute -left-[6px] top-1.5 w-3 h-3 rounded-full bg-cyber-accent border-2 border-cyber-black shadow-[0_0_15px_rgba(188,19,254,0.8)] group-hover:scale-125 transition-transform duration-300"></div>
+                    <div class="bg-gray-900/40 p-6 rounded-xl border border-gray-800 hover:border-cyber-accent/40 backdrop-blur-md transition-all duration-300">
+                        <div class="flex flex-wrap justify-between items-start gap-2 mb-4">
+                            <div>
+                                <h3 class="text-xl font-bold text-white mb-1 group-hover:text-cyber-secondary transition-colors">Cybersecurity Engineer</h3>
+                                <p class="text-cyber-accent font-mono text-sm tracking-wide">Quadrasystems.net India Private Limited</p>
+                            </div>
+                            <span class="text-gray-500 font-mono text-xs bg-black/40 px-3 py-1 rounded-full border border-gray-800">2024 - PRESENT</span>
+                        </div>
+                        <ul class="space-y-3">
+                            <li class="flex items-start gap-2 text-sm text-gray-400">
+                                <i data-lucide="chevron-right" class="w-4 h-4 text-cyber-secondary mt-0.5 shrink-0"></i>
+                                <span>Managing enterprise security infrastructure and implementing robust defense mechanisms.</span>
+                            </li>
+                            <li class="flex items-start gap-2 text-sm text-gray-400">
+                                <i data-lucide="chevron-right" class="w-4 h-4 text-cyber-secondary mt-0.5 shrink-0"></i>
+                                <span>Conducting regular security assessments and vulnerability remediation.</span>
+                            </li>
+                            <li class="flex items-start gap-2 text-sm text-gray-400">
+                                <i data-lucide="chevron-right" class="w-4 h-4 text-cyber-secondary mt-0.5 shrink-0"></i>
+                                <span>Monitoring SIEM dashboards for suspicious activities and ensuring rapid incident response.</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Experience 2 -->
+                <div class="relative pl-10 group">
+                    <div class="absolute -left-[6px] top-1.5 w-3 h-3 rounded-full bg-cyber-secondary border-2 border-cyber-black shadow-[0_0_15px_rgba(0,240,255,0.8)] group-hover:scale-125 transition-transform duration-300"></div>
+                    <div class="bg-gray-900/40 p-6 rounded-xl border border-gray-800 hover:border-cyber-secondary/40 backdrop-blur-md transition-all duration-300">
+                        <div class="flex flex-wrap justify-between items-start gap-2 mb-4">
+                            <div>
+                                <h3 class="text-xl font-bold text-white mb-1 group-hover:text-cyber-secondary transition-colors">Junior Cybersecurity Analyst</h3>
+                                <p class="text-cyber-accent font-mono text-sm tracking-wide">Prompt Infotech pvt Ltd</p>
+                            </div>
+                            <span class="text-gray-500 font-mono text-xs bg-black/40 px-3 py-1 rounded-full border border-gray-800">2020 - 2021</span>
+                        </div>
+                        <ul class="space-y-3">
+                            <li class="flex items-start gap-2 text-sm text-gray-400">
+                                <i data-lucide="chevron-right" class="w-4 h-4 text-cyber-secondary mt-0.5 shrink-0"></i>
+                                <span>Identified security flaws in systems, Networks, and Applications.</span>
+                            </li>
+                            <li class="flex items-start gap-2 text-sm text-gray-400">
+                                <i data-lucide="chevron-right" class="w-4 h-4 text-cyber-secondary mt-0.5 shrink-0"></i>
+                                <span>Checked for misconfigurations in Servers, Routers, and Cloud environments.</span>
+                            </li>
+                            <li class="flex items-start gap-2 text-sm text-gray-400">
+                                <i data-lucide="chevron-right" class="w-4 h-4 text-cyber-secondary mt-0.5 shrink-0"></i>
+                                <span>Continuously analyzed logs, alerts, and network traffic.</span>
+                            </li>
+                            <li class="flex items-start gap-2 text-sm text-gray-400">
+                                <i data-lucide="chevron-right" class="w-4 h-4 text-cyber-secondary mt-0.5 shrink-0"></i>
+                                <span>Analyzed and patched weaknesses before attackers could exploit them.</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Core Competencies Section -->
+    <section id="skills" class="py-32 scroll-mt-24">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center gap-3 mb-12">
+                <div class="p-2 bg-cyber-accentDim rounded-lg border border-cyber-accent/20">
+                    <i data-lucide="cpu" class="w-6 h-6 text-cyber-accent"></i>
+                </div>
+                <h2 class="text-2xl md:text-3xl font-bold text-gray-100 font-mono">
+                    <span class="text-cyber-accent mr-2"></span>Core Competencies
+                </h2>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Operations -->
+                <div class="bg-gray-800/30 backdrop-blur-sm border border-gray-700 p-6 rounded-xl hover:border-cyber-accent/50 transition-all duration-300 group">
+                    <div class="flex items-center gap-3 mb-6 border-b border-gray-700 pb-4">
+                        <i data-lucide="shield" class="w-5 h-5 text-cyber-accent group-hover:scale-110 transition-transform"></i>
+                        <h3 class="text-xl font-bold text-white mb-1 group-hover:text-cyber-secondary transition-colors">Security Operations</h3>
+                    </div>
+                    <ul class="space-y-3">
+                        <li class="flex items-start gap-2 text-sm text-gray-300"><span class="text-cyber-accent mt-0.5">▹</span><span>SIEM Management</span></li>
+                        <li class="flex items-start gap-2 text-sm text-gray-300"><span class="text-cyber-accent mt-0.5">▹</span><span>Threat Detection & Monitoring</span></li>
+                        <li class="flex items-start gap-2 text-sm text-gray-300"><span class="text-cyber-accent mt-0.5">▹</span><span>Incident Response (IR)</span></li>
+                        <li class="flex items-start gap-2 text-sm text-gray-300"><span class="text-cyber-accent mt-0.5">▹</span><span>Vulnerability Scanning</span></li>
+                        <li class="flex items-start gap-2 text-sm text-gray-300"><span class="text-cyber-accent mt-0.5">▹</span><span>MITRE ATT&CK Framework</span></li>
+                    </ul>
+                </div>
+
+                <!-- Tools -->
+                <div class="bg-gray-800/30 backdrop-blur-sm border border-gray-700 p-6 rounded-xl hover:border-cyber-secondary/50 transition-all duration-300 group">
+                    <div class="flex items-center gap-3 mb-6 border-b border-gray-700 pb-4">
+                        <i data-lucide="wrench" class="w-5 h-5 text-cyber-secondary group-hover:scale-110 transition-transform"></i>
+                        <h3 class="text-xl font-bold text-white mb-1 group-hover:text-cyber-secondary transition-colors">Security Tools</h3>
+                    </div>
+                    <ul class="space-y-3">
+                        <li class="flex items-start gap-2 text-sm text-gray-300"><span class="text-cyber-secondary mt-0.5">▹</span><span>Splunk & Sysmon</span></li>
+                        <li class="flex items-start gap-2 text-sm text-gray-300"><span class="text-cyber-secondary mt-0.5">▹</span><span>Nessus & OpenVas</span></li>
+                        <li class="flex items-start gap-2 text-sm text-gray-300"><span class="text-cyber-secondary mt-0.5">▹</span><span>Snort & Suricata</span></li>
+                        <li class="flex items-start gap-2 text-sm text-gray-300"><span class="text-cyber-secondary mt-0.5">▹</span><span>Wireshark & Tshark</span></li>
+                        <li class="flex items-start gap-2 text-sm text-gray-300"><span class="text-cyber-secondary mt-0.5">▹</span><span>Kali Linux Arsenal</span></li>
+                    </ul>
+                </div>
+
+                <!-- Systems -->
+                <div class="bg-gray-800/30 backdrop-blur-sm border border-gray-700 p-6 rounded-xl hover:border-cyber-accent/50 transition-all duration-300 group">
+                    <div class="flex items-center gap-3 mb-6 border-b border-gray-700 pb-4">
+                        <i data-lucide="layers" class="w-5 h-5 text-cyber-accent group-hover:scale-110 transition-transform"></i>
+                        <h3 class="text-xl font-bold text-white mb-1 group-hover:text-cyber-secondary transition-colors">Tech Stack</h3>
+                    </div>
+                    <ul class="space-y-3">
+                        <li class="flex items-start gap-2 text-sm text-gray-300"><span class="text-cyber-accent mt-0.5">▹</span><span>Bash Scripting</span></li>
+                        <li class="flex items-start gap-2 text-sm text-gray-300"><span class="text-cyber-accent mt-0.5">▹</span><span>Windows Server Security</span></li>
+                        <li class="flex items-start gap-2 text-sm text-gray-300"><span class="text-cyber-accent mt-0.5">▹</span><span>Linux Administration</span></li>
+                        <li class="flex items-start gap-2 text-sm text-gray-300"><span class="text-cyber-accent mt-0.5">▹</span><span>Network Protocols</span></li>
+                        <li class="flex items-start gap-2 text-sm text-gray-300"><span class="text-cyber-accent mt-0.5">▹</span><span>Cloud Hardening</span></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="py-32 scroll-mt-24">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center gap-3 mb-12">
+                <div class="p-2 bg-cyber-accentDim rounded-lg border border-cyber-accent/20">
+                    <i data-lucide="file-text" class="w-6 h-6 text-cyber-accent"></i>
+                </div>
+                <h2 class="text-2xl md:text-3xl font-bold text-gray-100 font-mono">
+                    <span class="text-cyber-accent mr-2"></span>Security Projects
+                </h2>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Project 1 -->
+                <div class="bg-gray-800/30 border border-gray-700 rounded-xl overflow-hidden hover:bg-gray-800/60 transition-all duration-300 hover:shadow-xl hover:shadow-cyber-accent/10 flex flex-col h-full group">
+                    <div class="p-1 bg-gradient-to-r from-cyber-accent/40 to-cyber-secondary/40"></div>
+                    <div class="p-6 flex-1 flex flex-col">
+                        <div class="flex justify-between items-start mb-4">
+                            <h3 class="text-xl font-bold text-gray-100 group-hover:text-cyber-secondary transition-colors">Simulated Phishing Attack & IR</h3>
+                            <i data-lucide="shield" class="w-5 h-5 text-cyber-accent shrink-0"></i>
+                        </div>
+                        <p class="text-gray-400 mb-4 text-sm leading-relaxed">Executed a simulated phishing campaign in a controlled lab environment followed by a full Incident Response process.</p>
+                        <div class="mb-4 p-3 bg-black/40 rounded-lg border border-cyber-accent/20">
+                            <p class="text-xs text-cyber-secondary font-mono">
+                                <span class="text-gray-500">></span> Performed log review, malware identification, and drafted executive reports.
+                            </p>
+                        </div>
+                        <div class="mt-auto">
+                            <div class="flex flex-wrap gap-2 mt-2">
+                                <span class="text-xs font-mono text-gray-500 border-b border-gray-700 pb-0.5">Windows VM</span>
+                                <span class="text-xs font-mono text-gray-500 border-b border-gray-700 pb-0.5">Sysinternals</span>
+                                <span class="text-xs font-mono text-gray-500 border-b border-gray-700 pb-0.5">Kali Linux</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 2 -->
+                <div class="bg-gray-800/30 border border-gray-700 rounded-xl overflow-hidden hover:bg-gray-800/60 transition-all duration-300 hover:shadow-xl hover:shadow-cyber-accent/10 flex flex-col h-full group">
+                    <div class="p-1 bg-gradient-to-r from-cyber-accent/40 to-cyber-secondary/40"></div>
+                    <div class="p-6 flex-1 flex flex-col">
+                        <div class="flex justify-between items-start mb-4">
+                            <h3 class="text-xl font-bold text-gray-100 group-hover:text-cyber-secondary transition-colors">IDS Deployment & Packet Analysis</h3>
+                            <i data-lucide="activity" class="w-5 h-5 text-cyber-accent shrink-0"></i>
+                        </div>
+                        <p class="text-gray-400 mb-4 text-sm leading-relaxed">Deployed Suricata IDS to monitor a test network. Generated attack traffic to tune rules and reduce false positives.</p>
+                        <div class="mb-4 p-3 bg-black/40 rounded-lg border border-cyber-accent/20">
+                            <p class="text-xs text-cyber-secondary font-mono">
+                                <span class="text-gray-500">></span> Successfully detected SQL Injection attempts and optimized alert thresholds.
+                            </p>
+                        </div>
+                        <div class="mt-auto">
+                            <div class="flex flex-wrap gap-2 mt-2">
+                                <span class="text-xs font-mono text-gray-500 border-b border-gray-700 pb-0.5">Snort</span>
+                                <span class="text-xs font-mono text-gray-500 border-b border-gray-700 pb-0.5">Suricata</span>
+                                <span class="text-xs font-mono text-gray-500 border-b border-gray-700 pb-0.5">Wireshark</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 3 -->
+                <div class="bg-gray-800/30 border border-gray-700 rounded-xl overflow-hidden hover:bg-gray-800/60 transition-all duration-300 hover:shadow-xl hover:shadow-cyber-accent/10 flex flex-col h-full group">
+                    <div class="p-1 bg-gradient-to-r from-cyber-accent/40 to-cyber-secondary/40"></div>
+                    <div class="p-6 flex-1 flex flex-col">
+                        <div class="flex justify-between items-start mb-4">
+                            <h3 class="text-xl font-bold text-gray-100 group-hover:text-cyber-secondary transition-colors">SIEM Log Monitoring & Detection</h3>
+                            <i data-lucide="layout" class="w-5 h-5 text-cyber-accent shrink-0"></i>
+                        </div>
+                        <p class="text-gray-400 mb-4 text-sm leading-relaxed">Built a Splunk SIEM lab to ingest and analyze Sysmon and Windows logs. Created custom detection rules.</p>
+                        <div class="mb-4 p-3 bg-black/40 rounded-lg border border-cyber-accent/20">
+                            <p class="text-xs text-cyber-secondary font-mono">
+                                <span class="text-gray-500">></span> Focused on detecting Brute Force attempts and PowerShell-based attacks.
+                            </p>
+                        </div>
+                        <div class="mt-auto">
+                            <div class="flex flex-wrap gap-2 mt-2">
+                                <span class="text-xs font-mono text-gray-500 border-b border-gray-700 pb-0.5">Splunk</span>
+                                <span class="text-xs font-mono text-gray-500 border-b border-gray-700 pb-0.5">Sysmon</span>
+                                <span class="text-xs font-mono text-gray-500 border-b border-gray-700 pb-0.5">Windows Server</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Certifications Section -->
+    <section id="certs" class="py-32 scroll-mt-24">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center gap-3 mb-12">
+                <div class="p-2 bg-cyber-accentDim rounded-lg border border-cyber-accent/20">
+                    <i data-lucide="award" class="w-6 h-6 text-cyber-accent"></i>
+                </div>
+                <h2 class="text-2xl md:text-3xl font-bold text-gray-100 font-mono">
+                    <span class="text-cyber-accent mr-2"></span>Certifications
+                </h2>
+            </div>
+
+            <div class="bg-gray-900/40 rounded-xl border border-gray-800 overflow-hidden backdrop-blur-md">
+                <div class="divide-y divide-gray-800">
+                    <div class="px-6 py-5 flex items-center gap-4 hover:bg-white/5 transition-all duration-300 group">
+                        <div class="p-2 rounded-lg bg-gray-800 text-cyber-accent group-hover:bg-cyber-accent group-hover:text-white shadow-lg transition-all">
+                            <i data-lucide="shield-check" class="w-5 h-5"></i>
+                        </div>
+                        <div>
+                            <span class="block text-sm font-bold text-gray-200 group-hover:text-cyber-secondary transition-colors">Post Graduation in Cybersecurity</span>
+                            <span class="text-xs text-gray-500 font-mono">Imarticus Learning</span>
+                        </div>
+                    </div>
+
+                    <div class="px-6 py-5 flex items-center gap-4 hover:bg-white/5 transition-all duration-300 group">
+                        <div class="p-2 rounded-lg bg-gray-800 text-cyber-accent group-hover:bg-cyber-accent group-hover:text-white shadow-lg transition-all">
+                            <i data-lucide="terminal" class="w-5 h-5"></i>
+                        </div>
+                        <div>
+                            <span class="block text-sm font-bold text-gray-200 group-hover:text-cyber-secondary transition-colors">Certified Ethical Hacker (CEH) Practical</span>
+                            <span class="text-xs text-gray-500 font-mono">EC-Council</span>
+                        </div>
+                    </div>
+
+                    <div class="px-6 py-5 flex items-center gap-4 hover:bg-white/5 transition-all duration-300 group">
+                        <div class="p-2 rounded-lg bg-gray-800 text-cyber-accent group-hover:bg-cyber-accent group-hover:text-white shadow-lg transition-all">
+                            <i data-lucide="fingerprint" class="w-5 h-5"></i>
+                        </div>
+                        <div>
+                            <span class="block text-sm font-bold text-gray-200 group-hover:text-cyber-secondary transition-colors">Certified Penetration Tester (CPT)</span>
+                            <span class="text-xs text-gray-500 font-mono">Industry Standard</span>
+                        </div>
+                    </div>
+
+                    <div class="px-6 py-5 flex items-center gap-4 hover:bg-white/5 transition-all duration-300 group">
+                        <div class="p-2 rounded-lg bg-gray-800 text-cyber-accent group-hover:bg-cyber-accent group-hover:text-white shadow-lg transition-all">
+                            <i data-lucide="network" class="w-5 h-5"></i>
+                        </div>
+                        <div>
+                            <span class="block text-sm font-bold text-gray-200 group-hover:text-cyber-secondary transition-colors">Cisco Certified Network Associate (CCNA)</span>
+                            <span class="text-xs text-gray-500 font-mono">Cisco Systems</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="py-20 bg-black/90 border-t border-white/5 backdrop-blur-3xl relative z-10">
+        <div class="max-w-7xl mx-auto px-4 text-center">
+            <h2 class="text-3xl font-black text-white mb-6 tracking-widest text-glow uppercase">PRINCE RICHART</h2>
+            <div class="inline-block px-6 py-3 bg-white/5 rounded-full backdrop-blur-md border border-white/5 mb-10">
+                <p class="text-gray-400 font-mono text-sm">Coimbatore | +91 8220083409 | princerichart46@gmail.com</p>
+            </div>
+            <div class="flex justify-center gap-6 mt-4">
+                <a href="https://github.com/Richie13root" target="_blank" class="text-gray-500 hover:text-cyber-accent transition-colors"><i class="fab fa-github text-xl"></i></a>
+                <a href="https://linkedin.com/in/princerichart" target="_blank" class="text-gray-500 hover:text-cyber-accent transition-colors"><i class="fab fa-linkedin text-xl"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        lucide.createIcons();
+        const canvas = document.getElementById('bg-canvas');
+        const ctx = canvas.getContext('2d');
+        let particles = [];
+        window.addEventListener('resize', initParticles);
+
+        function initParticles() {
+            canvas.width = window.innerWidth; canvas.height = window.innerHeight;
+            particles = [];
+            const count = (canvas.width * canvas.height) /1500;
+            for (let i = 0; i < count; i++) {
+                particles.push({
+                    x: Math.random() * canvas.width, y: Math.random() * canvas.height,
+                    size: Math.random() * 2 + 1, speedX: Math.random() * 0.4 - 0.2, speedY: Math.random() * 0.4 - 0.2,
+                    color: Math.random() > 0.5 ? '#bc13fe' : '#00f0ff', opacity: Math.random() * 0.5 + 0.2
+                });
+            }
+        }
+        
+        // 🖱️ Mouse tracker
+	const mouse = { x: null, y: null, radius: 200 };
+ 
+	window.addEventListener("mousemove", e => {
+    		mouse.x = e.clientX;
+    	mouse.y = e.clientY;
+	});
+ 
+	window.addEventListener("mouseout", () => {
+    	mouse.x = null;
+   	 mouse.y = null;
+	});
+ 
+	//  Repel logic
+	function repelFromMouse(p) {
+    		if (mouse.x === null || mouse.y === null) return;
+ 
+    			const dx = p.x - mouse.x;
+    			const dy = p.y - mouse.y;
+    			const distance = Math.sqrt(dx * dx + dy * dy);
+ 
+    		if (distance < mouse.radius) {
+        		const force = (mouse.radius - distance) / mouse.radius;
+        		p.x += (dx / distance) * force * 4;
+        		p.y += (dy / distance) * force * 4;
+   		 }
+	}
+ 
+	function animate() {
+    		ctx.clearRect(0, 0, canvas.width, canvas.height);
+ 
+   	   particles.forEach(p => {
+        	p.x += p.speedX;
+      		p.y += p.speedY;
+ 
+       	 repelFromMouse(p); // integrated here
+ 
+        	if (p.x > canvas.width) p.x = 0;
+        	else if (p.x < 0) p.x = canvas.width;
+        	if (p.y > canvas.height) p.y = 0;
+       		else if (p.y < 0) p.y = canvas.height;
+ 
+       		ctx.fillStyle = p.color;
+        	ctx.globalAlpha = p.opacity;
+        	ctx.beginPath();
+        	ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+        	ctx.fill();
+   	 });
+ 
+   	 requestAnimationFrame(animate);
+	}
+ 
+	document.addEventListener('DOMContentLoaded', () => {
+    	initParticles();
+    	animate();
+	});
+
+        function animate1() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            particles.forEach(p => {
+                p.x += p.speedX; p.y += p.speedY;
+                if (p.x > canvas.width) p.x = 0; else if (p.x < 0) p.x = canvas.width;
+                if (p.y > canvas.height) p.y = 0; else if (p.y < 0) p.y = canvas.height;
+                ctx.fillStyle = p.color; ctx.globalAlpha = p.opacity;
+                ctx.beginPath(); ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2); ctx.fill();
+            });
+            requestAnimationFrame(animate1);
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            initParticles(); animate();
+            const terminalContent = document.getElementById('terminal-content');
+            const lines = [
+                { text: 'Initialising security_analyst_core...', style: 'text-gray-500' },
+                { text: 'Encryption Layer: Active @ Quadrasystems', style: 'text-cyber-accent' },
+                { text: 'visitor@prince-r:~$ whoami', style: 'text-white mt-2' },
+                { text: 'Prince Richart | Cyber Defense Engineer', style: 'text-cyber-secondary' },
+                { text: 'visitor@prince-r:~$ check_status', style: 'text-white mt-2' },
+                { text: '[SUCCESS] Role: Cybersecurity Engineer', style: 'text-green-500' },
+                { text: '[SUCCESS] Org: Quadrasystems.net', style: 'text-green-500' }
+            ];
+            let i = 0;
+            function type() {
+                if (i < lines.length) {
+                    const div = document.createElement('div');
+                    div.className = `mb-1 ${lines[i].style || ''}`;
+                    div.textContent = lines[i].text;
+                    terminalContent.appendChild(div);
+                    i++;
+                    const tb = document.getElementById('terminal-body');
+                    if(tb) tb.scrollTop = 9999;
+                    setTimeout(type, 300);
+                }
+            }
+            setTimeout(type, 1000);
+        });
+    </script>
+</body>
+</html>
