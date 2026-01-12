@@ -33,6 +33,20 @@
                         mono: ['"JetBrains Mono"', 'monospace'],
                         sans: ['"Inter"', 'sans-serif'],
                     }
+					animation: {
+                        'blink': 'blink 1s step-end infinite',
+                        'infinite-scroll': 'infinite-scroll 25s linear infinite',
+                    },
+                       keyframes: {
+                        blink: {
+                            '0%, 100%': { opacity: '1' },
+                            '50%': { opacity: '0' },
+                        },
+                        'infinite-scroll': {
+                            from: { transform: 'translateX(0)' },
+                            to: { transform: 'translateX(-100%)' },
+                        }
+                    }
                 }
             }
         }
@@ -137,6 +151,58 @@
             </div>
         </div>
     </section>
+
+	<!-- NEW SECTION: INFINTIE SCROLL CAROUSEL -->
+<section class="py-20 relative overflow-hidden bg-cyber-dark/30 border-y border-gray-900">
+<div class="max-w-7xl mx-auto px-4 mb-10 text-center">
+<h2 class="text-xl font-bold text-gray-500 tracking-[0.3em] uppercase">Trusted Security Stack</h2>
+</div>
+<div class="carousel-mask relative flex overflow-hidden">
+<!-- First set of items -->
+<div class="flex animate-infinite-scroll whitespace-nowrap py-4 items-center">
+<div class="mx-12 flex items-center gap-3 text-gray-400 font-mono text-lg font-bold hover:text-cyber-green transition-colors cursor-default">
+<i class="fas fa-shield-virus text-3xl"></i> CROWDSTRIKE
+</div>
+<div class="mx-12 flex items-center gap-3 text-gray-400 font-mono text-lg font-bold hover:text-cyber-green transition-colors cursor-default">
+<i class="fas fa-network-wired text-3xl"></i> ZSCALER
+</div>
+<div class="mx-12 flex items-center gap-3 text-gray-400 font-mono text-lg font-bold hover:text-cyber-green transition-colors cursor-default">
+<i class="fas fa-search text-3xl"></i> SPLUNK
+</div>
+<div class="mx-12 flex items-center gap-3 text-gray-400 font-mono text-lg font-bold hover:text-cyber-green transition-colors cursor-default">
+<i class="fab fa-microsoft text-3xl"></i> SENTINEL
+</div>
+<div class="mx-12 flex items-center gap-3 text-gray-400 font-mono text-lg font-bold hover:text-cyber-green transition-colors cursor-default">
+<i class="fas fa-user-secret text-3xl"></i> ETHICAL HACKING
+</div>
+<div class="mx-12 flex items-center gap-3 text-gray-400 font-mono text-lg font-bold hover:text-cyber-green transition-colors cursor-default">
+<i class="fas fa-code text-3xl"></i> BASH SCRIPTING
+</div>
+</div>
+<!-- Duplicate set for seamless loop -->
+<div class="flex animate-infinite-scroll whitespace-nowrap py-4 items-center" aria-hidden="true">
+<div class="mx-12 flex items-center gap-3 text-gray-400 font-mono text-lg font-bold hover:text-cyber-green transition-colors cursor-default">
+<i class="fas fa-shield-virus text-3xl"></i> CROWDSTRIKE
+</div>
+<div class="mx-12 flex items-center gap-3 text-gray-400 font-mono text-lg font-bold hover:text-cyber-green transition-colors cursor-default">
+<i class="fas fa-network-wired text-3xl"></i> ZSCALER
+</div>
+<div class="mx-12 flex items-center gap-3 text-gray-400 font-mono text-lg font-bold hover:text-cyber-green transition-colors cursor-default">
+<i class="fas fa-search text-3xl"></i> SPLUNK
+</div>
+<div class="mx-12 flex items-center gap-3 text-gray-400 font-mono text-lg font-bold hover:text-cyber-green transition-colors cursor-default">
+<i class="fab fa-microsoft text-3xl"></i> SENTINEL
+</div>
+<div class="mx-12 flex items-center gap-3 text-gray-400 font-mono text-lg font-bold hover:text-cyber-green transition-colors cursor-default">
+<i class="fas fa-user-secret text-3xl"></i> ETHICAL HACKING
+</div>
+<div class="mx-12 flex items-center gap-3 text-gray-400 font-mono text-lg font-bold hover:text-cyber-green transition-colors cursor-default">
+<i class="fas fa-code text-3xl"></i> BASH SCRIPTING
+</div>
+</div>
+</div>
+</section>
+
 
     <!-- History Section -->
     <section id="experience" class="py-32 scroll-mt-24">
@@ -554,6 +620,7 @@
 </body>
 
 </html>
+
 
 
 
