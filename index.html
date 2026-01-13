@@ -54,6 +54,18 @@
 
     <style>
         body { background-color: #050505; color: #e5e7eb; margin: 0; padding: 0; min-height: 100vh; }
+
+		/* [INSERTED] Matrix Canvas Styling */
+        #matrix-canvas { 
+            position: fixed; 
+            top: 0; 
+            left: 0; 
+            width: 100%; 
+            height: 100%; 
+            z-index: 0; 
+            pointer-events: none; 
+        }
+
         #bg-canvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none; background: radial-gradient(circle at center, rgba(10, 10, 15, 0) 0%, rgba(0, 0, 0, 0.8) 100%); }
         ::-webkit-scrollbar { width: 8px; }
         ::-webkit-scrollbar-track { background: #050505; }
@@ -73,7 +85,7 @@
     </style>
 </head>
 <body class="font-sans antialiased overflow-x-hidden relative">
-
+    <canvas id="matrix-canvas"></canvas>
     <canvas id="bg-canvas"></canvas>
 
     <nav class="fixed w-full z-50 bg-cyber-dark/80 backdrop-blur-lg border-b border-white/5">
@@ -572,124 +584,128 @@
 
     <script>
         lucide.createIcons();
-        const canvas = document.getElementById('bg-canvas');
+
+        // --- MATRIX RAIN SCRIPT ---
+        const canvas = document.getElementById('matrix-canvas');
         const ctx = canvas.getContext('2d');
-        let particles = [];
-        window.addEventListener('resize', initParticles);
 
-        function initParticles() {
-            canvas.width = window.innerWidth; canvas.height = window.innerHeight;
-            particles = [];
-            const count = (canvas.width * canvas.height) /1500;
-            for (let i = 0; i < count; i++) {
-                particles.push({
-                    x: Math.random() * canvas.width, y: Math.random() * canvas.height,
-                    size: Math.random() * 2 + 1, speedX: Math.random() * 0.4 - 0.2, speedY: Math.random() * 0.4 - 0.2,
-                    color: Math.random() > 0.5 ? '#bc13fe' : '#00f0ff', opacity: Math.random() * 0.5 + 0.2
-                });
-            }
-        }
+        let width, height, columns;
+        const fontSize = 16;
+        const characters = 'ROOTRICHIEWEFGFOWHFWF%##^@$#&(^%$@^';
+        const charArray = characters.split('');
+        let drops = [];
         
-        // 🖱️ Mouse tracker
-	const mouse = { x: null, y: null, radius: 200 };
- 
-	window.addEventListener("mousemove", e => {
-    		mouse.x = e.clientX;
-    	mouse.y = e.clientY;
-	});
- 
-	window.addEventListener("mouseout", () => {
-    	mouse.x = null;
-   	 mouse.y = null;
-	});
- 
-	//  Repel logic
-	function repelFromMouse(p) {
-    		if (mouse.x === null || mouse.y === null) return;
- 
-    			const dx = p.x - mouse.x;
-    			const dy = p.y - mouse.y;
-    			const distance = Math.sqrt(dx * dx + dy * dy);
- 
-    		if (distance < mouse.radius) {
-        		const force = (mouse.radius - distance) / mouse.radius;
-        		p.x += (dx / distance) * force * 4;
-        		p.y += (dy / distance) * force * 4;
-   		 }
-	}
- 
-	function animate() {
-    		ctx.clearRect(0, 0, canvas.width, canvas.height);
- 
-   	   particles.forEach(p => {
-        	p.x += p.speedX;
-      		p.y += p.speedY;
- 
-       	 repelFromMouse(p); // integrated here
- 
-        	if (p.x > canvas.width) p.x = 0;
-        	else if (p.x < 0) p.x = canvas.width;
-        	if (p.y > canvas.height) p.y = 0;
-       		else if (p.y < 0) p.y = canvas.height;
- 
-       		ctx.fillStyle = p.color;
-        	ctx.globalAlpha = p.opacity;
-        	ctx.beginPath();
-        	ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
-        	ctx.fill();
-   	 });
- 
-   	 requestAnimationFrame(animate);
-	}
- 
-	document.addEventListener('DOMContentLoaded', () => {
-    	initParticles();
-    	animate();
-	});
+        let mouse = { x: -1000, y: -1000 };
 
-        function animate1() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            particles.forEach(p => {
-                p.x += p.speedX; p.y += p.speedY;
-                if (p.x > canvas.width) p.x = 0; else if (p.x < 0) p.x = canvas.width;
-                if (p.y > canvas.height) p.y = 0; else if (p.y < 0) p.y = canvas.height;
-                ctx.fillStyle = p.color; ctx.globalAlpha = p.opacity;
-                ctx.beginPath(); ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2); ctx.fill();
-            });
-            requestAnimationFrame(animate1);
+        window.addEventListener('mousemove', (e) => {
+            mouse.x = e.clientX;
+            mouse.y = e.clientY;
+        });
+
+        function initMatrix() {
+            width = canvas.width = window.innerWidth;
+            height = canvas.height = window.innerHeight;
+            columns = Math.floor(width / fontSize);
+            drops = [];
+            for (let i = 0; i < columns; i++) {
+                drops[i] = Math.random() * -100;
+            }
         }
 
-        document.addEventListener('DOMContentLoaded', () => {
-            initParticles(); animate();
-            const terminalContent = document.getElementById('terminal-content');
-            const lines = [
-                { text: 'Initialising security_analyst_core...', style: 'text-gray-500' },
-                { text: 'Encryption Layer: Active @ Quadrasystems', style: 'text-cyber-accent' },
-                { text: 'visitor@prince-r:~$ whoami', style: 'text-white mt-2' },
-                { text: 'Prince Richart | Cyber Defense Engineer', style: 'text-cyber-secondary' },
-                { text: 'visitor@prince-r:~$ check_status', style: 'text-white mt-2' },
-                { text: '[SUCCESS] Role: Cybersecurity Engineer', style: 'text-green-500' },
-                { text: '[SUCCESS] Org: Quadrasystems.net', style: 'text-green-500' }
-            ];
-            let i = 0;
-            function type() {
-                if (i < lines.length) {
-                    const div = document.createElement('div');
-                    div.className = `mb-1 ${lines[i].style || ''}`;
-                    div.textContent = lines[i].text;
-                    terminalContent.appendChild(div);
-                    i++;
-                    const tb = document.getElementById('terminal-body');
-                    if(tb) tb.scrollTop = 9999;
-                    setTimeout(type, 300);
+        function drawMatrix() {
+            // Dark trail effect
+            ctx.fillStyle = 'rgba(5, 5, 5, 0.15)';
+            ctx.fillRect(0, 0, width, height);
+
+            ctx.font = fontSize + 'px "JetBrains Mono", monospace';
+            
+            for (let i = 0; i < drops.length; i++) {
+                const text = charArray[Math.floor(Math.random() * charArray.length)];
+                
+                const x = i * fontSize;
+                const y = drops[i] * fontSize;
+
+                const dx = x - mouse.x;
+                const dy = y - mouse.y;
+                const distance = Math.sqrt(dx * dx + dy * dy);
+                const threshold = 180; 
+
+                let renderX = x;
+                let renderY = y;
+                let speedIncrement = 0.55; // MEDIUM SPEED
+
+                if (distance < threshold) {
+                    // REPEL LOGIC
+                   // const force = (threshold - distance) / threshold;
+                   // const angle = Math.atan2(dy, dx);
+                   // const repelStrength = 60; 
+                   // renderX += Math.cos(angle) * force * repelStrength;
+                  //  renderY += Math.sin(angle) * force * repelStrength;
+
+                    // RED ALERT COLOR
+                   // ctx.fillStyle = '#ff0055';
+                  //  ctx.shadowBlur = 15;
+                   // ctx.shadowColor = '#ff0055';
+                  //  speedIncrement += 0.4;
+                } else {
+                    // PURPLE & BLUE BASE
+                    ctx.shadowBlur = 0;
+                    if (Math.random() > 0.85) {
+                        ctx.fillStyle = '#bc13fe'; // Purple
+                    } else {
+                        ctx.fillStyle = '#00f0ff'; // Blue
+                    }
                 }
+                
+                ctx.fillText(text, renderX, renderY);
+
+                if (drops[i] * fontSize > height && Math.random() > 0.975) {
+                    drops[i] = 0;
+                }
+                drops[i] += speedIncrement;
             }
-            setTimeout(type, 1000);
-        });
+        }
+
+        window.addEventListener('resize', initMatrix);
+        initMatrix();
+        
+        function animateMatrix() {
+            drawMatrix();
+            requestAnimationFrame(animateMatrix);
+        }
+        animateMatrix();
+
+        // --- TERMINAL TYPING LOGIC ---
+        const terminalContent = document.getElementById('terminal-content');
+        const terminalLines = [
+            { text: 'Initialising security_analyst_core...', style: 'text-gray-500' },
+            { text: 'Encryption Layer: Active @ Quadrasystems', style: 'text-cyber-accent' },
+            { text: 'visitor@prince-r:~$ whoami', style: 'text-white mt-2' },
+            { text: 'Prince Richart | Cyber Defense Engineer', style: 'text-cyber-secondary' },
+            { text: 'visitor@prince-r:~$ check_status', style: 'text-white mt-2' },
+            { text: '[SUCCESS] Role: Cybersecurity Engineer', style: 'text-green-500' },
+            { text: '[SUCCESS] Org: Quadrasystems.net', style: 'text-green-500' }
+        ];
+        let lineIdx = 0;
+        function typeTerminal() {
+            if (lineIdx < terminalLines.length) {
+                const div = document.createElement('div');
+                div.className = `mb-1 ${terminalLines[lineIdx].style || ''}`;
+                div.textContent = terminalLines[lineIdx].text;
+                terminalContent.appendChild(div);
+                lineIdx++;
+                const tb = document.getElementById('terminal-body');
+                if(tb) tb.scrollTop = 9999;
+                setTimeout(typeTerminal, 300);
+            }
+        }
+        setTimeout(typeTerminal, 1000);
     </script>
+	
 </body>
 
 </html>
+
 
 
 
